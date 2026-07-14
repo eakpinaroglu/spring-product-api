@@ -1,5 +1,7 @@
 package com.eakpinaroglu.productapi.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,21 +14,23 @@ import com.eakpinaroglu.productapi.service.Category.CategoryService;
 
 import lombok.RequiredArgsConstructor;
 
-@RequestMapping("api/v1/category")
+@RequestMapping("api/v1/categories")
 @RestController
 @RequiredArgsConstructor
-public class CategoryController {
+public class CategoriesController {
     
     private final CategoryService categoryService;
     
-    @GetMapping("/get")
-    public String get() {
-        return "Hello";
-    }
 
-    @PostMapping("addCategory")
+    @PostMapping
     public AddCategoryResponse AddCategory(@RequestBody AddCategoryRequest request) {
         var response = categoryService.AddCategory(request);
+        return response;
+    }
+
+    @GetMapping
+    public List<AddCategoryResponse> GetCategories() {
+        var response = categoryService.ListCategories();
         return response;
     }
 }

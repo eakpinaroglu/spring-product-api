@@ -1,5 +1,7 @@
 package com.eakpinaroglu.productapi.service.Category;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.eakpinaroglu.productapi.entity.Category;
@@ -33,6 +35,20 @@ public class CategoryService implements ICategoryService {
         response.setDescription(saved.getDescription());
         response.setName(saved.getName());
         return response;
+    }
+
+
+    @Override
+    public List<AddCategoryResponse> ListCategories() {
+        List<Category> categories = categoryRepository.findAll();
+        List<AddCategoryResponse> result = categories.stream().map(x-> {
+            var model =  new AddCategoryResponse();
+            model.setActive(x.getActive());
+            model.setName(x.getName());
+            model.setDescription(x.getDescription());
+            return model;
+        }).toList();
+        return result;
     }
     
 }
