@@ -1,9 +1,13 @@
 package com.eakpinaroglu.productapi.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "category",schema = "PRODUCT")
+@Setter
+@Getter
 public class Category {
 
     @Id
